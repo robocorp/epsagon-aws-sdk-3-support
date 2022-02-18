@@ -1,3 +1,5 @@
+import epsagon from "epsagon";
+import crypto from "crypto";
 import { Agent } from "https";
 import {
   DynamoDBDocumentClient,
@@ -21,11 +23,17 @@ if (TABLE === "PLACEHOLDER" || AWS_REGION === "PLACEHOLDER") {
   );
 }
 
+const generateRandomId = (length: number) =>
+  crypto.randomBytes(length).toString("hex");
+
 const httpsAgent = new Agent({
   keepAlive: true,
   maxSockets: 50,
   rejectUnauthorized: true,
 });
+
+// Random call to get epsagon loaded into the current process
+epsagon.getTraceUrl();
 
 const buildRequestHandler = (): NodeHttpHandler =>
   new NodeHttpHandler({
@@ -50,13 +58,11 @@ const dynamoDocumentClient: DynamoDBDocumentClient =
 
 describe("AWS SDK 3 support for Epsagon", () => {
   it("should allow inserting an item to Dynamo and retrieve it", async () => {
+    const itemID = generateRandomId(10);
     const itemToInsert: PutCommandInput["Item"] = {
-      PK: "TEST_PK",
-      SK: "TEST_SK",
       version: 1,
-      data: {
-        value: "Lorem Ipsum",
-      },
+      PK: `SOME_PK_${itemID}`,
+      SK: "SOME_SK",
     };
 
     const putParams: PutCommandInput = {
@@ -72,8 +78,8 @@ describe("AWS SDK 3 support for Epsagon", () => {
     const getParams: GetCommandInput = {
       TableName: TABLE,
       Key: {
-        PK: "TEST_PK",
-        SK: "TEST_SK",
+        PK: itemToInsert.PK,
+        SK: itemToInsert.SK,
       },
     };
 

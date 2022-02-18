@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose --runInBand"
+    "test": "jest --verbose --runInBand",
+    "test:old": "npm install epsagon@1.119.0 && npm run test",
+    "test:new": "npm install epsagon@^1.120.1 && npm run test"
   },
   "repository": {
     "type": "git",
