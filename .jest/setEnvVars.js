@@ -1,0 +1,2 @@
+process.env.AWS_REGION = "PLACEHOLDER";
+process.env.DYNAMO_TABLE = "PLACEHOLDER";
