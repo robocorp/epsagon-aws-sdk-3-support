@@ -1,0 +1,24 @@
+{
+  "name": "epsagon-x-aws-sdk-3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --verbose --runInBand"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robocorp/epsagon-aws-sdk-3-support.git"
+  },
+  "author": "robocorp.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/robocorp/epsagon-aws-sdk-3-support/issues"
+  },
+  "homepage": "https://github.com/robocorp/epsagon-aws-sdk-3-support#readme",
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.3"
+  }
+}
